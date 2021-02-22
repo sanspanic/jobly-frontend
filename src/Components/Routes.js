@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import Company from "./Companies/Company";
 import Companies from "./Companies/Companies";
