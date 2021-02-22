@@ -5,6 +5,8 @@ import Companies from "./Companies/Companies";
 import Jobs from "./Jobs/Jobs";
 import Job from "./Jobs/Job";
 import Profile from "./Users/Profile";
+import Signup from "./Auth/Signup";
+import Login from "./Auth/Login";
 import Home from "./Home";
 
 const Routes = () => {
@@ -27,6 +29,12 @@ const Routes = () => {
       </Route>
       <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/signup">
+        <Signup />
       </Route>
     </Switch>
   );
