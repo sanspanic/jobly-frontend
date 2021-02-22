@@ -36,6 +36,27 @@ class JoblyApi {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
+
+  /* Get a list of all companies */
+
+  static async getCompanies() {
+    let res = await this.request("companies");
+    return res.companies;
+  }
+
+  /* get details on one job by id */
+
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+    return res.job;
+  }
+
+  /* get a list of all jobs */
+
+  static async getJobs() {
+    let res = await this.request(`jobs`);
+    return res.jobs;
+  }
 }
 
 // for now, token ("testuser" / "password")
