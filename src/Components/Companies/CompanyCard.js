@@ -27,7 +27,7 @@ const CompanyCard = ({ company }) => {
         <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
           <img src={`Logos/${randNum}.png`}></img>
         </div>
-        <p className="mb-2 font-bold">{company.name}</p>
+        <p className="mb-2 font-bold font-mono">{company.name}</p>
         <p className="mb-1 text-sm leading-5 text-gray-900 italic">
           Number of employees:{" "}
           <span className="font-normal not-italic">{company.numEmployees}</span>

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import JoblyApi from "../../api";
 import { useParams } from "react-router-dom";
+import JobCard from "../Jobs/JobCard";
 
 const Company = () => {
-  const [currCompany, setCurrCompany] = useState({});
+  const [currCompany, setCurrCompany] = useState({
+    name: "",
+    description: "",
+    jobs: [],
+  });
   const { handle } = useParams();
   console.log(handle);
 
@@ -15,7 +20,7 @@ const Company = () => {
       console.log(res);
     };
     getOneCompany(handle);
-    console.log(currCompany);
+    console.log("effect ran, set company as: ", currCompany);
     return () => {};
   }, []);
 
@@ -24,9 +29,20 @@ const Company = () => {
       <Header
         title={currCompany.name}
         category="Company"
-        description="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae."
+        description={currCompany.description}
       />
-      <div>Jobs:</div>
+
+      <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
+        <div className="mb-4 lg:mb-6 shadow-xl text-white rounded-2xl bg-gradient-to-r from-deep-purple-accent-400 via-purple-200 to-white px-4 py-2  lg:py-4 font-mono rounded flex flex-col justify-center items-center w-64 sm:mx-auto">
+          <p>Employees: {currCompany.numEmployees}</p>
+          <p>Available jobs: {currCompany.jobs.length}</p>
+        </div>
+        <div className="relative grid gap-5 lg:grid-cols-1">
+          {currCompany.jobs.map((j) => (
+            <JobCard job={j} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };

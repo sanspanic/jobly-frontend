@@ -36,7 +36,7 @@ const Navbar = () => {
           <ul class="flex items-center hidden space-x-8 lg:flex">
             <li>
               <a
-                href="/"
+                href="/companies"
                 aria-label="Our product"
                 title="Our product"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -46,7 +46,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="/"
+                href="/jobs"
                 aria-label="Our product"
                 title="Our product"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -56,7 +56,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="/"
+                href="/profile"
                 aria-label="Product pricing"
                 title="Product pricing"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -66,7 +66,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="/"
+                href="/signup"
                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 aria-label="Sign up"
                 title="Sign up"

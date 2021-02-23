@@ -14,7 +14,7 @@ class JoblyApi {
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method);
+    console.debug("API Call:", "endpoint: ", endpoint, "data: ", data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
@@ -40,8 +40,8 @@ class JoblyApi {
 
   /* Get a list of all companies */
 
-  static async getCompanies() {
-    let res = await this.request("companies");
+  static async getCompanies(data) {
+    let res = await this.request("companies", data);
     return res.companies;
   }
 
