@@ -3,6 +3,7 @@ import Header from "../Header";
 import JoblyApi from "../../api";
 import { useParams } from "react-router-dom";
 import JobCard from "../Jobs/JobCard";
+import { v4 as uuid } from "uuid";
 
 const Company = () => {
   const [currCompany, setCurrCompany] = useState({
@@ -39,7 +40,7 @@ const Company = () => {
         </div>
         <div className="relative grid gap-5 lg:grid-cols-1">
           {currCompany.jobs.map((j) => (
-            <JobCard job={j} />
+            <JobCard key={uuid()} job={j} />
           ))}
         </div>
       </div>

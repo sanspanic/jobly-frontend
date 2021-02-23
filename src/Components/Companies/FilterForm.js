@@ -15,7 +15,6 @@ const FilterForm = ({ addFilterCriteria }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addFilterCriteria(formData);
-    console.log("sending ", formData);
     setFormData(initialState);
   };
 
