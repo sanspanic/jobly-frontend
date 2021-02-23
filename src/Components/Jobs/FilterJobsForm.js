@@ -63,7 +63,7 @@ const FilterJobsForm = ({ addFilterCriteria }) => {
                 className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-teal-accent-400 focus:bg-transparent focus:ring-2 focus:ring-teal-accent-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
             </div>
-            <div class="relative flex-grow w-full">
+            <div class="relative flex-grow w-12 text-center mx-auto">
               <label
                 htmlFor="hasEquity"
                 className="leading-7 text-sm text-gray-600"
@@ -76,7 +76,7 @@ const FilterJobsForm = ({ addFilterCriteria }) => {
                 name="hasEquity"
                 checked={formData.hasEquity}
                 onChange={handleCheckboxChange}
-                className="checked:bg-gray-100 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:bg-transparent ease-in-out"
+                className="checked:bg-teal-accent-400 h-9 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:bg-transparent ease-in-out"
               ></input>
             </div>
           </div>

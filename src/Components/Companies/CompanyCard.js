@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 //import logo from "../../Assets/Logos/earth.png";
 
 const CompanyCard = ({ company }) => {
@@ -9,13 +9,14 @@ const CompanyCard = ({ company }) => {
   useEffect(() => {
     const num = Math.floor(Math.random() * 26) + 1;
     setRandNum(num);
+    console.log("set rand num", randNum);
     return () => {};
   }, []);
 
   //redirect to company page on click
   const history = useHistory();
   const redirect = () => {
-    history.push(`companies/${company.handle}`);
+    history.push(`/companies/${company.handle}`);
   };
 
   return (

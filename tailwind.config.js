@@ -5,6 +5,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundColor: ["checked"],
+      borderColor: ["checked"],
       colors: {
         red: {
           50: "#ffebee",

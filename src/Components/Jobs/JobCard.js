@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const JobCard = ({ job }) => {
   //fake logos: generate random num between 1-26 to select from logos served in public
@@ -10,8 +11,16 @@ const JobCard = ({ job }) => {
     return () => {};
   }, []);
 
+  const history = useHistory();
+  const handleClick = () => {
+    history.push(`/jobs/${job.id}`);
+  };
+
   return (
-    <div className="cursor-pointer flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
+    <div
+      onClick={handleClick}
+      className="cursor-pointer flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl"
+    >
       <div className="flex items-center justify-between p-5">
         <div>
           <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
@@ -27,7 +36,7 @@ const JobCard = ({ job }) => {
           <p className="mb-1 text-sm leading-5 text-gray-900 italic">
             Salary:{" "}
             <span className="font-normal not-italic">
-              £{job.salary ? job.salary : " N/A"}
+              {job.salary ? `£ ${job.salary.toLocaleString("en-US")}` : " N/A"}
             </span>
           </p>
           <p className="text-sm leading-5 text-gray-900 italic">

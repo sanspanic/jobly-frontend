@@ -34,7 +34,7 @@ const Jobs = () => {
       <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
         <CircleSVG />
         <FilterJobsForm addFilterCriteria={addFilterCriteria} />
-        <div className="relative grid gap-5 grid-cols-2">
+        <div className="relative grid gap-5 grid-cols-1 sm:grid-cols-2">
           {jobs.map((j) => (
             <JobCard job={j} key={uuid()} />
           ))}
