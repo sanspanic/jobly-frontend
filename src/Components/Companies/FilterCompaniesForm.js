@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FilterForm = ({ addFilterCriteria }) => {
+const FilterCompaniesForm = ({ addFilterCriteria }) => {
   const initialState = { name: "", minEmployees: "", maxEmployees: "" };
   const [formData, setFormData] = useState(initialState);
 
@@ -83,4 +83,4 @@ const FilterForm = ({ addFilterCriteria }) => {
   );
 };
 
-export default FilterForm;
+export default FilterCompaniesForm;

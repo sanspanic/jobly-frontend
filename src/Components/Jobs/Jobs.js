@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import FilterForm from "../Companies/FilterForm";
 import JobCard from "./JobCard";
 import CircleSVG from "../Companies/CircleSVG";
 import JoblyApi from "../../api";
 import { v4 as uuid } from "uuid";
+import FilterJobsForm from "./FilterJobsForm";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [filterCriteria, setFilterCriteria] = useState({});
+
   useEffect(() => {
-    const getJobs = async () => {
-      const res = await JoblyApi.getJobs();
+    const getJobs = async (criteria) => {
+      const res = await JoblyApi.getJobs(criteria);
       setJobs(res);
     };
-    getJobs();
+    getJobs(filterCriteria);
     return () => {};
-  }, []);
+  }, [filterCriteria]);
+
+  const addFilterCriteria = (formData) => {
+    setFilterCriteria(formData);
+  };
 
   return (
     <div className="bg-gray-100">
@@ -27,8 +33,7 @@ const Jobs = () => {
       />
       <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
         <CircleSVG />
-        {/*         <FilterForm addFilterCriteria={addFilterCriteria} />
-         */}{" "}
+        <FilterJobsForm addFilterCriteria={addFilterCriteria} />
         <div className="relative grid gap-5 grid-cols-2">
           {jobs.map((j) => (
             <JobCard job={j} key={uuid()} />
