@@ -20,7 +20,7 @@ const FilterCompaniesForm = ({ addFilterCriteria }) => {
 
   return (
     <section class="text-gray-600 body-font">
-      <div class="container px-5 pb-24 mx-auto">
+      <div class="container px-5 pb-10  mx-auto">
         <form onSubmit={handleSubmit}>
           <div class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
             <div class="relative flex-grow w-full">

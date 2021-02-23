@@ -8,7 +8,9 @@ const CompanyCard = ({ company }) => {
 
   useEffect(() => {
     const num = Math.floor(Math.random() * 26) + 1;
+    console.log("num: ", num);
     setRandNum(num);
+    //safs
     console.log("set rand num", randNum);
     return () => {};
   }, []);
@@ -26,12 +28,14 @@ const CompanyCard = ({ company }) => {
     >
       <div className="p-5">
         <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-          <img src={`Logos/${randNum}.png`}></img>
+          <img src={`../Logos/${randNum}.png`}></img>
         </div>
         <p className="mb-2 font-bold font-mono">{company.name}</p>
         <p className="mb-1 text-sm leading-5 text-gray-900 italic">
           Number of employees:{" "}
-          <span className="font-normal not-italic">{company.numEmployees}</span>
+          <span className="font-normal not-italic">
+            {company.numEmployees ? company.numEmployees : "N/A"}
+          </span>
         </p>
         <p className="text-sm leading-5 text-gray-900 italic">
           Description:{" "}
