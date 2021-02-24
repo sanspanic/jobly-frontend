@@ -8,6 +8,7 @@ const Login = () => {
     username: "sandy",
     password: "password",
   };
+
   const [formData, setFormData] = useState(initialState);
   const { login } = useContext(AuthContext);
   const history = useHistory();
@@ -22,9 +23,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData);
-    setFormData(initialState);
-    history.push("/companies");
+    try {
+      login(formData);
+      setFormData(initialState);
+      history.push("/jobs");
+    } catch (e) {
+      console.log("OOOOPS");
+    }
   };
 
   return (

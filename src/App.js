@@ -11,16 +11,19 @@ import Job from "./Components/Jobs/Job";
 function App() {
   const [currUser, setCurrUser] = useState({});
   const [token, setToken] = useState("");
-
-  console.log(currUser);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const getCurrentUser = async (token) => {
-      /*       const res = await JoblyApi.getUser(token);
-      console.log(res);
-      setCurrUser(res); */
+    //set current token
+    JoblyApi.token = token;
+
+    //retrieve current user based on current token and username
+    const getUser = async () => {
+      const user = await JoblyApi.getUser(username);
+      setCurrUser(user);
     };
-    getCurrentUser(token);
+    getUser();
+
     return () => {};
   }, [token]);
 
@@ -31,12 +34,11 @@ function App() {
   };
 
   const login = async (formData) => {
+    //username needs to be exposed because the effect uses it to talk to backend
+    setUsername(formData.username);
     const token = await JoblyApi.login(formData);
-    console.log(token);
+    //once token is changed, effect is triggered that sets currUser
     setToken(token);
-    const user = await JoblyApi.getUser(formData.username);
-    console.log(user);
-    setCurrUser(user);
   };
 
   const logout = () => {

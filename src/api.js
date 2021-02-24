@@ -66,8 +66,7 @@ class JoblyApi {
     return res.token;
   }
 
-  /* login new user */
-
+  /* login  user */
   static async login(data) {
     let res = await this.request(`auth/token`, data, "post");
     return res.token;
@@ -76,15 +75,16 @@ class JoblyApi {
   /* get user -- for now, will only work for testuser until tokens implemented */
 
   static async getUser(username) {
+    console.log("token from api class: ", this.token);
     let res = await this.request(`users/${username}`);
     return res.user;
   }
 }
 
 // for now, token ("testuser" / "password")
-JoblyApi.token =
+/* JoblyApi.token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc"; */
 
 export default JoblyApi;
