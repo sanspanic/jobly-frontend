@@ -6,10 +6,11 @@ import Routes from "./Components/Routes";
 import Footer from "./Components/Footer";
 import AuthContext from "./Components/Auth/authContext";
 import JoblyApi from "./api";
+import Job from "./Components/Jobs/Job";
 
 function App() {
-  const [currUser, setCurrUser] = useState();
-  const [token, setToken] = useState();
+  const [currUser, setCurrUser] = useState({});
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const getCurrentUser = async (token) => {
@@ -28,15 +29,21 @@ function App() {
   };
 
   const login = async (formData) => {
-    const res = await JoblyApi.login(formData);
-    console.log(res);
-    setToken(res);
+    const token = await JoblyApi.login(formData);
+    console.log(token);
+    setToken(token);
+    const user = await JoblyApi.getUser(formData.username);
+    console.log(user);
+    setCurrUser(user);
   };
 
-  const logout = () => {};
+  const logout = () => {
+    setCurrUser({});
+    setToken("");
+  };
 
   return (
-    <AuthContext.Provider value={{ register, login, logout, token }}>
+    <AuthContext.Provider value={{ register, login, logout, token, currUser }}>
       <BrowserRouter>
         <Navbar />
         <Routes />

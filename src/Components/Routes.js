@@ -8,6 +8,7 @@ import Profile from "./Users/Profile";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import Home from "./Home";
+import Logout from "./Auth/Logout";
 
 const Routes = () => {
   return (
@@ -35,6 +36,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/signup">
         <Signup />
+      </Route>
+      <Route exact path="/logout">
+        <Logout />
       </Route>
     </Switch>
   );

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "./Auth/authContext";
+import LoginButton from "./Auth/LoginButton";
+import LogoutButton from "./Auth/LogoutButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currUser } = useContext(AuthContext);
 
   return (
     <div className="bg-gray-900">
@@ -64,26 +68,19 @@ const Navbar = () => {
                 Profile
               </a>
             </li>
-            <li>
-              <a
-                href="/login"
-                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Login"
-                title="Login"
-              >
-                Login
-              </a>
-            </li>
-            <li>
-              <a
-                href="/signup"
-                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Sign up"
-                title="Sign up"
-              >
-                Sign up
-              </a>
-            </li>
+            {currUser.username ? <LogoutButton /> : <LoginButton />}
+            {currUser.username ? null : (
+              <li>
+                <a
+                  href="/signup"
+                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  aria-label="Sign up"
+                  title="Sign up"
+                >
+                  Sign up
+                </a>
+              </li>
+            )}
           </ul>
           <div className="lg:hidden z-50">
             <button
@@ -186,26 +183,23 @@ const Navbar = () => {
                           Profile
                         </a>
                       </li>
-                      <li>
-                        <a
-                          href="/signup"
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Sign up"
-                          title="Sign up"
-                        >
-                          Sign up
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="/login"
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Login"
-                          title="Login"
-                        >
-                          Login
-                        </a>
-                      </li>
+                      {currUser.username ? (
+                        <LogoutButton smallScreen />
+                      ) : (
+                        <LoginButton smallScreen />
+                      )}
+                      {currUser.username ? null : (
+                        <li>
+                          <a
+                            href="/signup"
+                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                            aria-label="Sign up"
+                            title="Sign up"
+                          >
+                            Sign up
+                          </a>
+                        </li>
+                      )}
                     </ul>
                   </nav>
                 </div>
