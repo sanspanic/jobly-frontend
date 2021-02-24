@@ -12,6 +12,8 @@ function App() {
   const [currUser, setCurrUser] = useState({});
   const [token, setToken] = useState("");
 
+  console.log(currUser);
+
   useEffect(() => {
     const getCurrentUser = async (token) => {
       /*       const res = await JoblyApi.getUser(token);

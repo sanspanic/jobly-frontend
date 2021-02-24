@@ -9,6 +9,7 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import Home from "./Home";
 import Logout from "./Auth/Logout";
+import ProtectedRoute from "./Auth/ProtectedRoute";
 
 const Routes = () => {
   return (

@@ -12,8 +12,8 @@ const Navbar = () => {
     <div className="bg-gray-900">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
-          <a
-            href="/"
+          <Link
+            to="/"
             aria-label="Company"
             title="Company"
             className="inline-flex items-center"
@@ -36,38 +36,43 @@ const Navbar = () => {
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
               Get-A-Job
             </span>
-          </a>
+          </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
-              <a
-                href="/companies"
+              <Link
+                to="/companies"
                 aria-label="Our product"
                 title="Our product"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Companies
-              </a>
+              </Link>
             </li>
-            <li>
-              <a
-                href="/jobs"
-                aria-label="Our product"
-                title="Our product"
-                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Jobs
-              </a>
-            </li>
-            <li>
-              <a
-                href="/profile"
-                aria-label="Product pricing"
-                title="Product pricing"
-                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Profile
-              </a>
-            </li>
+            {currUser.username && (
+              <>
+                <li>
+                  <Link
+                    to="/jobs"
+                    aria-label="Our product"
+                    title="Our product"
+                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  >
+                    Jobs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/profile"
+                    aria-label="Product pricing"
+                    title="Product pricing"
+                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  >
+                    Profile
+                  </Link>
+                </li>
+              </>
+            )}
+
             {currUser.username ? <LogoutButton /> : <LoginButton />}
             {currUser.username ? null : (
               <li>
@@ -109,8 +114,8 @@ const Navbar = () => {
                 <div className="p-5 bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <a
-                        href="/companies"
+                      <Link
+                        to="/companies"
                         aria-label="Company"
                         title="Company"
                         className="inline-flex items-center"
@@ -133,7 +138,7 @@ const Navbar = () => {
                         <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                           Companies
                         </span>
-                      </a>
+                      </Link>
                     </div>
                     <div>
                       <button
@@ -154,34 +159,34 @@ const Navbar = () => {
                   <nav>
                     <ul className="space-y-4">
                       <li>
-                        <a
-                          href="/jobs"
-                          aria-label="Our product"
-                          title="Our product"
+                        <Link
+                          to="/jobs"
+                          aria-label="jobs"
+                          title="jobs"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Jobs
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="/companies"
+                        <Link
+                          to="/companies"
                           aria-label="Our product"
                           title="Our product"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Companies
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="/profile"
+                        <Link
+                          to="/profile"
                           aria-label="Our product"
                           title="Our product"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Profile
-                        </a>
+                        </Link>
                       </li>
                       {currUser.username ? (
                         <LogoutButton smallScreen />

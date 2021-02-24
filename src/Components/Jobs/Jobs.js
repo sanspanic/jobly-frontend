@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Header from "../Header";
 import JobCard from "./JobCard";
 import CircleSVG from "../Companies/CircleSVG";
 import JoblyApi from "../../api";
 import { v4 as uuid } from "uuid";
 import FilterJobsForm from "./FilterJobsForm";
+import ProtectedRoute from "../Auth/ProtectedRoute";
+import AuthContext from "../Auth/authContext";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const getJobs = async (criteria) => {
