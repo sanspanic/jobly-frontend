@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "./authContext";
 import AuthSVG from "./AuthSVG";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const initialState = {
     username: "",
     email: "",
@@ -10,6 +13,7 @@ const Signup = () => {
     lastName: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const { register, token } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,12 +25,14 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    register(formData);
     setFormData(initialState);
+    setHasSubmitted(true);
   };
 
   return (
     <div className="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center sm:px-5 py-2">
-      <div className="sm:w-8/12 bg-gray-100 text-gray-500 rounded-3xl shadow-xl  overflow-hidden">
+      <div className="w-11/12 sm:w-8/12 bg-gray-100 text-gray-500 rounded-3xl shadow-xl  overflow-hidden">
         <div className="md:flex w-full">
           <div className="hidden md:block w-1/2 bg-teal-400 py-10 px-10">
             <AuthSVG />
@@ -154,7 +160,21 @@ const Signup = () => {
                   </button>
                 </div>
               </div>
-            </form>
+            </form>{" "}
+            {hasSubmitted && (
+              <>
+                <div>Success!</div>
+                <div>
+                  You can now{" "}
+                  <Link
+                    className="bg-deep-purple-accent-400 text-white hover:bg-deep-purple-accent-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    to="/login"
+                  >
+                    LOGIN
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
