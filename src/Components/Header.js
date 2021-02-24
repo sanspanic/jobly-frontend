@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ title, category, description }) => {
   return (
-    <div className="mb-4 sm:mb-6 lg:mb-9 bg-gray-50 px-4 pb-1 pt-2 sm:py-3 md:pt-6 md:pb-3 lg:pt-20 mx-auto w-9/12 sm:w-7/12 md:px-24 lg:px-8">
+    <div className=" rounded-lg mb-4 sm:mb-6 lg:mb-9 bg-gray-50 px-4 pb-1 pt-2 sm:py-3 md:pt-6 md:pb-3 lg:pt-20 mx-auto w-9/12 sm:w-7/12 md:px-24 lg:px-8">
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
         <div>
           <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">

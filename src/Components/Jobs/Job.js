@@ -9,7 +9,7 @@ const Job = () => {
     title: "",
     salary: "",
     equity: "",
-    company: "",
+    company: { name: "" },
   });
 
   const { id } = useParams();
