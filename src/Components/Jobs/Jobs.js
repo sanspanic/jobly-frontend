@@ -11,7 +11,8 @@ import AuthContext from "../Auth/authContext";
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
-  const currUser = JSON.parse(localStorage.getItem("currUser"));
+  const { currUser } = useContext(AuthContext);
+  console.log("rendering jobs page, ", currUser);
 
   useEffect(() => {
     const getJobs = async (criteria) => {
@@ -29,7 +30,7 @@ const Jobs = () => {
 
   return (
     <>
-      {currUser ? (
+      {currUser.username ? (
         <div className="bg-gray-100">
           <Header
             title="All jobs"

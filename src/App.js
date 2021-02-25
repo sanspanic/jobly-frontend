@@ -9,7 +9,10 @@ import JoblyApi from "./api";
 import Job from "./Components/Jobs/Job";
 
 function App() {
-  const [currUser, setCurrUser] = useState({});
+  const [currUser, setCurrUser] = useState(() => {
+    const user = window.localStorage.getItem("currUser");
+    return user !== null ? JSON.parse(user) : {};
+  });
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
 
@@ -22,8 +25,7 @@ function App() {
     const getUser = async () => {
       const user = await JoblyApi.getUser(username);
       setCurrUser(user);
-      console.log(user.username);
-      localStorage.setItem("currUser", JSON.stringify(user));
+      window.localStorage.setItem("currUser", JSON.stringify(user));
     };
     getUser();
 

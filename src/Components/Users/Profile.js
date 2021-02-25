@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import AuthProvider from "../Auth/authContext";
+import AuthContext from "../Auth/authContext";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 
 const Profile = () => {
-  const currUser = JSON.parse(localStorage.getItem("currUser"));
+  const { currUser } = useContext(AuthContext);
   return (
     <>
-      {currUser ? <div>This will be a user's profile</div> : <ProtectedRoute />}
+      {currUser.username ? (
+        <div>This will be a user's profile</div>
+      ) : (
+        <ProtectedRoute />
+      )}
     </>
   );
 };

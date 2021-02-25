@@ -8,7 +8,7 @@ import AuthContext from "../Auth/authContext";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 
 const Company = () => {
-  const currUser = JSON.parse(localStorage.getItem("currUser"));
+  const { currUser } = useContext(AuthContext);
   const [currCompany, setCurrCompany] = useState({
     name: "",
     description: "",
@@ -29,7 +29,7 @@ const Company = () => {
 
   return (
     <>
-      {currUser ? (
+      {currUser.username ? (
         <div className="bg-gray-100">
           <Header
             title={currCompany.name}
