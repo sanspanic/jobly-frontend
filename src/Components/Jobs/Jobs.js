@@ -12,7 +12,6 @@ const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
   const { currUser } = useContext(AuthContext);
-  console.log("rendering jobs page, ", currUser);
 
   useEffect(() => {
     const getJobs = async (criteria) => {

@@ -21,6 +21,7 @@ class JoblyApi {
     const params = method === "get" ? data : {};
 
     try {
+      console.log("sent a request with the following header: ", headers);
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       console.error("API Error:", err.response);
@@ -75,9 +76,12 @@ class JoblyApi {
   /* get user -- for now, will only work for testuser until tokens implemented */
 
   static async getUser(username) {
-    console.log("token from api class: ", this.token);
     let res = await this.request(`users/${username}`);
     return res.user;
+  }
+  static async apply(username, jobId) {
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
+    return res.applied;
   }
 }
 

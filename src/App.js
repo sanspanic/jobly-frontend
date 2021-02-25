@@ -9,6 +9,7 @@ import JoblyApi from "./api";
 import Job from "./Components/Jobs/Job";
 
 function App() {
+  //looks for user in localStorage, if not found, user is empty obj
   const [currUser, setCurrUser] = useState(() => {
     const user = window.localStorage.getItem("currUser");
     return user !== null ? JSON.parse(user) : {};
@@ -23,6 +24,7 @@ function App() {
     //retrieve current user based on current token and username
     //save currUser to local storage
     const getUser = async () => {
+      //window.localStorage.removeItem("currUser");
       const user = await JoblyApi.getUser(username);
       setCurrUser(user);
       window.localStorage.setItem("currUser", JSON.stringify(user));
@@ -52,7 +54,9 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ register, login, logout, token, currUser }}>
+    <AuthContext.Provider
+      value={{ register, login, logout, token, currUser, setCurrUser }}
+    >
       <BrowserRouter>
         <Navbar />
         <Routes />
