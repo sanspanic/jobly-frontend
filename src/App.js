@@ -18,9 +18,12 @@ function App() {
     JoblyApi.token = token;
 
     //retrieve current user based on current token and username
+    //save currUser to local storage
     const getUser = async () => {
       const user = await JoblyApi.getUser(username);
       setCurrUser(user);
+      console.log(user.username);
+      localStorage.setItem("currUser", JSON.stringify(user));
     };
     getUser();
 
@@ -43,7 +46,7 @@ function App() {
 
   const logout = () => {
     setCurrUser({});
-    setToken("");
+    localStorage.removeItem("currUser");
   };
 
   return (

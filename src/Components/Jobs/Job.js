@@ -7,7 +7,7 @@ import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
 
 const Job = () => {
-  const { currUser } = useContext(AuthContext);
+  const currUser = JSON.parse(localStorage.getItem("currUser"));
   const [job, setJob] = useState({
     title: "",
     salary: "",
@@ -28,7 +28,7 @@ const Job = () => {
 
   return (
     <>
-      {currUser.username ? (
+      {currUser ? (
         <div className="bg-gray-100">
           <Header
             title={job.title}

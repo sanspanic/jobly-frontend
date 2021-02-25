@@ -3,14 +3,10 @@ import AuthProvider from "../Auth/authContext";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 
 const Profile = () => {
-  const { currUser } = useContext(AuthProvider);
+  const currUser = JSON.parse(localStorage.getItem("currUser"));
   return (
     <>
-      {currUser.username ? (
-        <div>This will be a user's profile</div>
-      ) : (
-        <ProtectedRoute />
-      )}
+      {currUser ? <div>This will be a user's profile</div> : <ProtectedRoute />}
     </>
   );
 };

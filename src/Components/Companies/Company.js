@@ -8,14 +8,13 @@ import AuthContext from "../Auth/authContext";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 
 const Company = () => {
-  const { currUser } = useContext(AuthContext);
+  const currUser = JSON.parse(localStorage.getItem("currUser"));
   const [currCompany, setCurrCompany] = useState({
     name: "",
     description: "",
     jobs: [],
   });
   const { handle } = useParams();
-  console.log(handle);
 
   useEffect(() => {
     const getOneCompany = async (handle) => {
@@ -30,7 +29,7 @@ const Company = () => {
 
   return (
     <>
-      {currUser.username ? (
+      {currUser ? (
         <div className="bg-gray-100">
           <Header
             title={currCompany.name}

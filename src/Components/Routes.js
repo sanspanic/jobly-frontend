@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Company from "./Companies/Company";
 import Companies from "./Companies/Companies";
 import Jobs from "./Jobs/Jobs";
@@ -9,7 +9,6 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import Home from "./Home";
 import Logout from "./Auth/Logout";
-import ProtectedRoute from "./Auth/ProtectedRoute";
 
 const Routes = () => {
   return (
@@ -41,6 +40,7 @@ const Routes = () => {
       <Route exact path="/logout">
         <Logout />
       </Route>
+      <Redirect to="/" />
     </Switch>
   );
 };
