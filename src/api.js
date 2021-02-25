@@ -11,13 +11,14 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
   // the token for interacting with the API will be stored here.
-  static token;
+  //static token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", "endpoint: ", endpoint, "data: ", data, method);
 
+    const token = window.localStorage.getItem("token");
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = { Authorization: `Bearer ${token}` };
     const params = method === "get" ? data : {};
 
     try {

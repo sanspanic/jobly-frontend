@@ -10,17 +10,24 @@ const AppliedJobsSection = () => {
   console.log(currUser.applications);
 
   useEffect(() => {
-    const getAppliedToJob = async (id) => {
-      const job = await JoblyApi.getJob(id);
-      setJobs([...jobs, job]);
+    const getJobs = async () => {
+      const pArr = currUser.applications.map((id) => JoblyApi.getJob(id));
+      const jobs = await Promise.all(pArr);
+      setJobs(jobs);
     };
 
-    currUser.applications.map((id) => {
-      getAppliedToJob(id);
-    });
-
-    return () => {};
+    getJobs();
   }, []);
+
+  /*   const getJobs = async () => {
+    const pArr = currUser.applications.map(JoblyApi.getJob.bind(JoblyApi));
+    const jobs = await Promise.all(pArr);
+    setJobs(jobs);
+  };
+
+  useEffect(() => {
+    getJobs();
+  }, []); */
 
   return (
     <>

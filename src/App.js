@@ -18,9 +18,10 @@ function App() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    //set current token
-    JoblyApi.token = token;
-
+    if (!token) {
+      return;
+    }
+    window.localStorage.setItem("token", token);
     //retrieve current user based on current token and username
     //save currUser to local storage
     const getUser = async () => {
@@ -29,10 +30,9 @@ function App() {
       setCurrUser(user);
       window.localStorage.setItem("currUser", JSON.stringify(user));
     };
+    console.log("is this gettin called?");
     getUser();
-
-    return () => {};
-  }, [token]);
+  }, [token, username]);
 
   const register = async (formData) => {
     const res = await JoblyApi.register(formData);
