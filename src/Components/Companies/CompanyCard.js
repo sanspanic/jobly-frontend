@@ -8,10 +8,9 @@ const CompanyCard = ({ company }) => {
 
   useEffect(() => {
     const num = Math.floor(Math.random() * 26) + 1;
-    console.log("num: ", num);
+
     setRandNum(num);
-    //safs
-    console.log("set rand num", randNum);
+
     return () => {};
   }, []);
 

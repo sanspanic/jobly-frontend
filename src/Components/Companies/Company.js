@@ -23,7 +23,6 @@ const Company = () => {
       console.log(res);
     };
     getOneCompany(handle);
-    console.log("effect ran, set company as: ", currCompany);
     return () => {};
   }, []);
 
