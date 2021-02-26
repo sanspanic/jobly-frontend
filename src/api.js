@@ -77,7 +77,9 @@ class JoblyApi {
   /* get user -- for now, will only work for testuser until tokens implemented */
 
   static async getUser(username) {
+    //console.log("I've been told to get a user");
     let res = await this.request(`users/${username}`);
+    //console.log("this is the result: ", res.user);
     return res.user;
   }
   static async apply(username, jobId) {

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import JoblyApi from "../../api";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import Header from "../Header";
 import CompanyCard from "../Companies/CompanyCard";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
 
 const Job = () => {
+  const history = useHistory();
   const { currUser } = useContext(AuthContext);
   const [job, setJob] = useState({
     title: "",
@@ -22,6 +23,7 @@ const Job = () => {
       const res = await JoblyApi.getJob(id);
       setJob(res);
     };
+
     getJob(id);
     return () => {};
   }, []);
@@ -44,7 +46,7 @@ const Job = () => {
             <div className="mb-4 font-medium text-gray-500">
               Find out more about {job.company.name} icon{" "}
             </div>
-            {console.log(job.company)}
+
             <CompanyCard company={job.company} />
           </div>
         </div>

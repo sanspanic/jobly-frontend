@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import JoblyApi from "../../api";
 import AuthContext from "../Auth/authContext";
+import RegularBtn from "./RegularBtn";
+import AppliedBtn from "./AppliedBtn";
 
 const JobCard = ({ job }) => {
   //fake logos: generate random num between 1-26 to select from logos served in public
@@ -17,26 +19,36 @@ const JobCard = ({ job }) => {
 
   useEffect(() => {
     //retrieve current user based on current token and username
-    //save currUser to local storage
+    //save currUser to local storage + update currUser state to allow button to change colours
     const getUser = async () => {
-      //window.localStorage.removeItem("currUser");
       const user = await JoblyApi.getUser(currUser.username);
-      //setCurrUser(user);
+      window.localStorage.removeItem("currUser");
       window.localStorage.setItem("currUser", JSON.stringify(user));
+      console.log("I just got a new user: ", user);
+      //setCurrUser(user);
     };
     getUser();
-
     return () => {};
   }, [applied]);
 
   const handleApply = (e) => {
-    const sendApplication = async () => {
-      const jobId = await JoblyApi.apply(currUser.username, job.id);
-      console.log(jobId);
-    };
-    sendApplication();
-    setApplied(true);
+    if (!currUser.applications.includes(job.id)) {
+      const sendApplication = async () => {
+        const jobId = await JoblyApi.apply(currUser.username, job.id);
+        console.log(jobId);
+        setApplied(true);
+      };
+      sendApplication();
+    } else {
+      console.log("already applied");
+    }
   };
+
+  const appliedInDB = currUser.applications.includes(job.id) ? true : false;
+  const currentlyClicked = applied ? true : false;
+
+  console.log("applied in DB ", appliedInDB);
+  console.log("currently clicked ", currentlyClicked);
 
   return (
     <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
@@ -72,12 +84,11 @@ const JobCard = ({ job }) => {
             </span>
           </p>
         </div>
-        <button
-          onClick={handleApply}
-          className="inline-flex items-center justify-center h-12 px-6 font-medium text-white bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 foxus:shadow-outline focus:outline-none transition-duration-200 rounded"
-        >
-          {applied ? "Applied" : "Apply"}
-        </button>
+        {!appliedInDB && !currentlyClicked ? (
+          <RegularBtn handleApply={handleApply} />
+        ) : (
+          <AppliedBtn />
+        )}
       </div>
       <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
     </div>

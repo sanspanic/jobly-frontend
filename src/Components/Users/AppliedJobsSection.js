@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../Auth/authContext";
 import JobCard from "../Jobs/JobCard";
 import JoblyApi from "../../api";
+import { v4 as uuid } from "uuid";
 
 const AppliedJobsSection = () => {
   const { currUser } = useContext(AuthContext);
@@ -39,9 +40,13 @@ const AppliedJobsSection = () => {
           <p>Job id: {jobId}</p>
         ))}
       </div>
-      {jobs.map((app) => (
-        <JobCard job={app} />
-      ))}
+      <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
+        <div className="relative grid gap-5 lg:grid-cols-1">
+          {jobs.map((app) => (
+            <JobCard key={uuid()} job={app} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };

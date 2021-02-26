@@ -29,8 +29,8 @@ function App() {
       const user = await JoblyApi.getUser(username);
       setCurrUser(user);
       window.localStorage.setItem("currUser", JSON.stringify(user));
+      console.log("is APP's USE EFFECT gettin called?");
     };
-    console.log("is this gettin called?");
     getUser();
   }, [token, username]);
 
