@@ -21,8 +21,13 @@ const Job = () => {
 
   useEffect(() => {
     const getJob = async (id) => {
-      const res = await JoblyApi.getJob(id);
-      setJob(res);
+      try {
+        const res = await JoblyApi.getJob(id);
+        setJob(res);
+      } catch (e) {
+        console.log("CAUGHT AN ERROR");
+        history.push("/missing");
+      }
     };
 
     getJob(id);
