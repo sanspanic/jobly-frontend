@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 import FilterJobsForm from "./FilterJobsForm";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
+import JobsContext from "./jobsContext";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);

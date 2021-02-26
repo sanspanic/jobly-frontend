@@ -4,12 +4,13 @@ import JoblyApi from "../../api";
 import AuthContext from "../Auth/authContext";
 import RegularBtn from "./RegularBtn";
 import AppliedBtn from "./AppliedBtn";
+import JobsContext from "./jobsContext";
 
 const JobCard = ({ job }) => {
   //fake logos: generate random num between 1-26 to select from logos served in public
   const [randNum, setRandNum] = useState(0);
-  const [applied, setApplied] = useState(false);
   const { currUser, setCurrUser } = useContext(AuthContext);
+  const { applications, setApplications } = useContext(JobsContext);
 
   useEffect(() => {
     const num = Math.floor(Math.random() * 26) + 1;
@@ -19,36 +20,32 @@ const JobCard = ({ job }) => {
 
   useEffect(() => {
     //retrieve current user based on current token and username
-    //save currUser to local storage + update currUser state to allow button to change colours
+    //save currUser to local storage + update currUser state
     const getUser = async () => {
       const user = await JoblyApi.getUser(currUser.username);
       window.localStorage.removeItem("currUser");
       window.localStorage.setItem("currUser", JSON.stringify(user));
       console.log("I just got a new user: ", user);
+      //TODO understand why updating currUser makes everything crash
       //setCurrUser(user);
     };
     getUser();
     return () => {};
-  }, [applied]);
+  }, [applications]);
 
   const handleApply = (e) => {
     if (!currUser.applications.includes(job.id)) {
       const sendApplication = async () => {
         const jobId = await JoblyApi.apply(currUser.username, job.id);
         console.log(jobId);
-        setApplied(true);
+        //setApplied(true);
+        setApplications([...applications, job.id]);
       };
       sendApplication();
     } else {
       console.log("already applied");
     }
   };
-
-  const appliedInDB = currUser.applications.includes(job.id) ? true : false;
-  const currentlyClicked = applied ? true : false;
-
-  console.log("applied in DB ", appliedInDB);
-  console.log("currently clicked ", currentlyClicked);
 
   return (
     <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
@@ -84,10 +81,10 @@ const JobCard = ({ job }) => {
             </span>
           </p>
         </div>
-        {!appliedInDB && !currentlyClicked ? (
-          <RegularBtn handleApply={handleApply} />
-        ) : (
+        {applications.includes(job.id) ? (
           <AppliedBtn />
+        ) : (
+          <RegularBtn handleApply={handleApply} />
         )}
       </div>
       <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />

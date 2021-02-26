@@ -5,8 +5,10 @@ import Navbar from "./Components/Navbar";
 import Routes from "./Components/Routes";
 import Footer from "./Components/Footer";
 import AuthContext from "./Components/Auth/authContext";
+import JobsContext from "./Components/Jobs/jobsContext";
 import JoblyApi from "./api";
 import Job from "./Components/Jobs/Job";
+import JobCard from "./Components/Jobs/JobCard";
 
 function App() {
   //looks for user in localStorage, if not found, user is empty obj
@@ -16,6 +18,10 @@ function App() {
   });
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
+  const [applications, setApplications] = useState(() => {
+    const user = window.localStorage.getItem("currUser");
+    return user !== null ? JSON.parse(user).applications : [];
+  });
 
   useEffect(() => {
     if (!token) {
@@ -57,11 +63,13 @@ function App() {
     <AuthContext.Provider
       value={{ register, login, logout, token, currUser, setCurrUser }}
     >
-      <BrowserRouter>
-        <Navbar />
-        <Routes />
-        <Footer />
-      </BrowserRouter>
+      <JobsContext.Provider value={{ applications, setApplications }}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes />
+          <Footer />
+        </BrowserRouter>
+      </JobsContext.Provider>
     </AuthContext.Provider>
   );
 }
