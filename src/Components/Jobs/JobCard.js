@@ -33,12 +33,13 @@ const JobCard = ({ job }) => {
     return () => {};
   }, [applications]);
 
+  //call API and "apply" in DB
+  //also trigget applications state change
+  //which will rerender jobs section in profile & trigger effect to update local storage
   const handleApply = (e) => {
-    if (!currUser.applications.includes(job.id)) {
+    if (!applications.includes(job.id)) {
       const sendApplication = async () => {
         const jobId = await JoblyApi.apply(currUser.username, job.id);
-        console.log(jobId);
-        //setApplied(true);
         setApplications([...applications, job.id]);
       };
       sendApplication();
