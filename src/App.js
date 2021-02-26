@@ -7,8 +7,15 @@ import Footer from "./Components/Footer";
 import AuthContext from "./Components/Auth/authContext";
 import JobsContext from "./Components/Jobs/jobsContext";
 import JoblyApi from "./api";
-import Job from "./Components/Jobs/Job";
-import JobCard from "./Components/Jobs/JobCard";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckSquare,
+  faCoffee,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(fab, faSpinner, faCheckSquare, faCoffee);
 
 function App() {
   //looks for user in localStorage, if not found, user is empty obj
@@ -19,6 +26,7 @@ function App() {
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
   const [applications, setApplications] = useState(() => {
+    //needs to make the API call here instead
     const user = window.localStorage.getItem("currUser");
     return user !== null ? JSON.parse(user).applications : [];
   });
@@ -35,6 +43,7 @@ function App() {
       const user = await JoblyApi.getUser(username);
       setCurrUser(user);
       window.localStorage.setItem("currUser", JSON.stringify(user));
+      setApplications(user.applications);
       console.log("is APP's USE EFFECT gettin called?");
     };
     getUser();

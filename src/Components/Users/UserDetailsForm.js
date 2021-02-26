@@ -2,15 +2,29 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../Auth/authContext";
 import JoblyApi from "../../api";
+import SuccessAlert from "../FormComponents/SuccessAlert";
+import Spinner from "../FormComponents/Spinner";
 
 const UserDetailsForm = () => {
   const { currUser } = useContext(AuthContext);
   const [formData, setFormData] = useState();
+  const [submitting, setSubmitting] = useState(false);
+  const [displaySuccess, setDisplaySuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
       JoblyApi.edit(currUser.username, formData);
+      setSubmitting(true);
+
+      setTimeout(() => {
+        setSubmitting(false);
+        setDisplaySuccess(true);
+      }, 2000);
+
+      setTimeout(() => {
+        setDisplaySuccess(false);
+      }, 5000);
     } catch (e) {
       console.log("CAUGHT ERROR", e);
     }
@@ -96,9 +110,13 @@ const UserDetailsForm = () => {
           type="submit"
           className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
         >
-          Accept Changes
+          Accept Changes 
         </button>
       </div>
+      {submitting && <Spinner />}
+      {displaySuccess && (
+        <SuccessAlert msg="User information has been successfully updated. Rejoice!" />
+      )}
     </form>
   );
 };
