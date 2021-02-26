@@ -77,14 +77,19 @@ class JoblyApi {
   /* get user -- for now, will only work for testuser until tokens implemented */
 
   static async getUser(username) {
-    //console.log("I've been told to get a user");
     let res = await this.request(`users/${username}`);
-    //console.log("this is the result: ", res.user);
     return res.user;
   }
+
   static async apply(username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
     return res.applied;
+  }
+
+  static async edit(username, data) {
+    console.log("API CLASS IS NOW GONNA SEND REQUEST");
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
 }
 
