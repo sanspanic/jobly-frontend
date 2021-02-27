@@ -1,5 +1,10 @@
 import React from "react";
-import { GithubLogo, TwitterLogo, PencilLine } from "phosphor-react";
+import {
+  GithubLogo,
+  TwitterLogo,
+  PencilLine,
+  LinkedinLogo,
+} from "phosphor-react";
 
 const Footer = () => {
   return (
@@ -91,15 +96,19 @@ const Footer = () => {
           </span>
           <div className="md:pt-5 flex items-center mt-1 space-x-3">
             <GithubLogo
-              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
               size={24}
             />
             <TwitterLogo
-              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
               size={24}
             />
             <PencilLine
-              className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+              size={24}
+            />
+            <LinkedinLogo
+              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
               size={24}
             />
           </div>

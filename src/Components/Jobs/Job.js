@@ -5,7 +5,8 @@ import Header from "../Header";
 import CompanyCard from "../Companies/CompanyCard";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
-import { ArrowSquareDown, CreditCard, ChartPieSlice } from "phosphor-react";
+import { ArrowSquareDown } from "phosphor-react";
+import JobDetail from "./JobDetail";
 
 const Job = () => {
   const history = useHistory();
@@ -38,14 +39,20 @@ const Job = () => {
     <>
       {currUser.username ? (
         <div className="bg-gray-100">
-          <Header
+          {/*           <Header
             title={job.title}
             category="Job"
             description={job.company.name}
-          />
+          /> */}
 
-          <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
-            <div className="mb-4 lg:mb-6 shadow-xl text-white rounded-2xl bg-gradient-to-r from-deep-purple-accent-200 via-deep-purple to-purple-200 px-4 py-2  lg:py-4 font-mono rounded flex flex-col sm:items-center justify-center  w-64 sm:mx-auto">
+          <div className="relative pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 md:pt-10 lg:pb-20">
+            <JobDetail
+              title={job.title}
+              companyName={job.company.name}
+              salary={job.salary}
+              equity={job.equity}
+            />
+            {/*  <div className="mb-4 lg:mb-6 shadow-xl text-white rounded-2xl bg-gradient-to-r from-deep-purple-accent-200 via-deep-purple to-purple-200 px-4 py-2  lg:py-4 font-mono rounded flex flex-col sm:items-center justify-center  w-64 sm:mx-auto">
               <p>
                 <CreditCard className="inline-block" size={34} />
                 Salary: £{job.salary.toLocaleString()}
@@ -54,8 +61,8 @@ const Job = () => {
                 <ChartPieSlice className="inline-block" size={32} />
                 Equity: {job.equity ? job.equity : "N/A"}
               </p>
-            </div>
-            <div className="flex items-center mb-4 font-medium text-gray-500">
+            </div> */}
+            <div className="flex items-center justify-center mb-4 font-medium text-gray-500">
               <span className="inline-block">
                 {" "}
                 <ArrowSquareDown
@@ -63,7 +70,15 @@ const Job = () => {
                   size={34}
                 />
               </span>
-              Find out more about {job.company.name}{" "}
+              Find out more about employer {" "}
+              <span className="font-mono text-black">{job.company.name}</span>{" "}
+              <span className="inline-block">
+                {" "}
+                <ArrowSquareDown
+                  className="text-deep-purple-accent-400"
+                  size={34}
+                />
+              </span>
             </div>
 
             <CompanyCard company={job.company} />
