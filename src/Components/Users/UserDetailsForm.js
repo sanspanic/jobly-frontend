@@ -29,6 +29,7 @@ const UserDetailsForm = () => {
       console.log("CAUGHT ERROR", e);
     }
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((formData) => ({

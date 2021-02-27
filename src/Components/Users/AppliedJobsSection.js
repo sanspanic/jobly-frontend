@@ -26,7 +26,9 @@ const AppliedJobsSection = () => {
   return (
     <>
       <div>
-        <h2 className="text-center text-4xl mb-20">Jobs I've Applied To</h2>
+        <h2 className="text-center font-mono text-4xl my-20">
+          My Job Applications
+        </h2>
       </div>
       <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
         <div className="relative grid gap-5 lg:grid-cols-1">

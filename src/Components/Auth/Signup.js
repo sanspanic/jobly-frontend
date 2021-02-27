@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "./authContext";
 import AuthSVG from "./AuthSVG";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import Spinner from "../FormComponents/Spinner";
+import SuccessAlert from "../FormComponents/SuccessAlert";
 
 const Signup = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -14,6 +16,9 @@ const Signup = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const { register, currUser } = useContext(AuthContext);
+  const [submitting, setSubmitting] = useState(false);
+  const [displaySuccess, setDisplaySuccess] = useState(false);
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +30,23 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(formData);
-    setFormData(initialState);
-    setHasSubmitted(true);
+    try {
+      register(formData);
+      setFormData(initialState);
+      setSubmitting(true);
+
+      setTimeout(() => {
+        setSubmitting(false);
+        setDisplaySuccess(true);
+      }, 2000);
+
+      setTimeout(() => {
+        history.push("/login");
+      }, 6000);
+    } catch (e) {
+      console.log("CAUGHT ERROR", e);
+    }
+    //setHasSubmitted(true);
   };
 
   return (
@@ -60,10 +79,11 @@ const Signup = () => {
                       <input
                         type="text"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="JohnSmith"
+                        placeholder="HPitty"
                         onChange={handleChange}
                         name="username"
                         value={formData.username}
+                        required
                       />
                     </div>
                   </div>
@@ -83,10 +103,11 @@ const Signup = () => {
                       <input
                         type="email"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="johnsmith@email.com"
+                        placeholder="vroom-on-the-broom@gmail.com"
                         name="email"
                         onChange={handleChange}
                         value={formData.email}
+                        required
                       />
                     </div>
                   </div>
@@ -106,10 +127,11 @@ const Signup = () => {
                       <input
                         type="text"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="John"
+                        placeholder="Harry"
                         name="firstName"
                         onChange={handleChange}
                         value={formData.firstName}
+                        required
                       />
                     </div>
                   </div>
@@ -127,10 +149,11 @@ const Signup = () => {
                       <input
                         type="text"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="Smith"
+                        placeholder="Potter"
                         name="lastName"
                         onChange={handleChange}
                         value={formData.lastName}
+                        required
                       />
                     </div>
                   </div>
@@ -154,6 +177,7 @@ const Signup = () => {
                         name="password"
                         onChange={handleChange}
                         value={formData.password}
+                        required
                       />
                     </div>
                   </div>
@@ -162,10 +186,21 @@ const Signup = () => {
                   <div className="w-full px-3 mb-5">
                     <button className="block w-full transition duration-200 max-w-xs mx-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
                       REGISTER NOW
+                      {submitting && (
+                        <span>
+                          <Spinner />
+                        </span>
+                      )}
                     </button>
                   </div>
                 </div>
               </form>{" "}
+              {displaySuccess && (
+                <>
+                  <SuccessAlert msg="Rejoice! You're about to be redirected to the login page." />
+                  <Spinner />
+                </>
+              )}
               {hasSubmitted && (
                 <>
                   <div>Success!</div>
