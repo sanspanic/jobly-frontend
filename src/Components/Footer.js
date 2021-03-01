@@ -80,14 +80,14 @@ const Footer = () => {
           <div className="flex">
             <p className="mr-1 text-gray-800">Location:</p>
             <a
-              href="https://www.google.com/maps"
+              href="https://www.google.com/maps/place/Edinburgh,+UK/@55.9411884,-3.2755498,12z/data=!3m1!4b1!4m5!3m4!1s0x4887b800a5982623:0x64f2147b7ce71727!8m2!3d55.953252!4d-3.188267"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Our address"
               title="Our address"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              Europe + Remote
+              Scotland/Remote
             </a>
           </div>
         </div>

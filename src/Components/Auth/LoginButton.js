@@ -1,4 +1,5 @@
 import React from "react";
+import { SignIn } from "phosphor-react";
 
 const LoginButton = (smallScreen) => {
   //if prop passed in, button will span entire width of container
@@ -11,7 +12,8 @@ const LoginButton = (smallScreen) => {
         aria-label="Login"
         title="Login"
       >
-        Login
+        Login 
+        <SignIn size={26} />
       </a>
     </li>
   );

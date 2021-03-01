@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MagnifyingGlass } from "phosphor-react";
 
 const FilterCompaniesForm = ({ addFilterCriteria }) => {
   const initialState = { name: "", minEmployees: "", maxEmployees: "" };
@@ -74,7 +75,11 @@ const FilterCompaniesForm = ({ addFilterCriteria }) => {
           </div>
           <div class="flex justify-center pt-4">
             <button class="z-50 mx-auto h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-              Filter
+              Filter{" "}
+              <MagnifyingGlass
+                size={30}
+                className="inline-flex items-baseline"
+              />
             </button>
           </div>
         </form>
