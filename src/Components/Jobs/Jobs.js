@@ -8,10 +8,12 @@ import FilterJobsForm from "./FilterJobsForm";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
 import { useHistory } from "react-router-dom";
+import Spinner from "../FormComponents/Spinner";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { currUser } = useContext(AuthContext);
   const history = useHistory();
 
@@ -29,8 +31,10 @@ const Jobs = () => {
   useEffect(() => {
     const getJobs = async (criteria) => {
       try {
+        setIsLoading(true);
         const res = await JoblyApi.getJobs(criteria);
         setJobs(res);
+        setIsLoading(false);
       } catch (e) {
         history.push("/request-error");
       }
@@ -52,12 +56,17 @@ const Jobs = () => {
           <Header
             title="All jobs"
             category="jobs"
-            description="Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque rem aperiam, eaque ipsa quae."
+            description="Browse through all listed jobs below. See something you like? Apply via the 'apply' button."
           />
           <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
             <CircleSVG />
             <FilterJobsForm addFilterCriteria={addFilterCriteria} />
+            {isLoading && (
+              <div className="font-xl font-mono text-center">
+                {" "}
+                Loading... <Spinner />
+              </div>
+            )}
             <div className="relative grid gap-5 grid-cols-1 sm:grid-cols-2">
               {jobs.map((j) => (
                 <JobCard job={j} key={uuid()} />
