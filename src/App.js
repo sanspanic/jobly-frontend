@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useHistory } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import Routes from "./Components/Routes";
@@ -18,6 +18,7 @@ import {
 library.add(fab, faSpinner, faCheckSquare, faCoffee);
 
 function App() {
+  const history = useHistory();
   //looks for user in localStorage, if not found, user is empty obj
   const [currUser, setCurrUser] = useState(() => {
     const user = window.localStorage.getItem("currUser");

@@ -26,7 +26,6 @@ const Job = () => {
         const res = await JoblyApi.getJob(id);
         setJob(res);
       } catch (e) {
-        console.log("CAUGHT AN ERROR");
         history.push("/missing");
       }
     };

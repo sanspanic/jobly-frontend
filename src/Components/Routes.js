@@ -8,7 +8,6 @@ import Profile from "./Users/Profile";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import Home from "./Home";
-import Logout from "./Auth/Logout";
 import MissingPage from "./MissingPage";
 
 const Routes = () => {
@@ -38,9 +37,7 @@ const Routes = () => {
       <Route exact path="/signup">
         <Signup />
       </Route>
-      <Route exact path="/logout">
-        <Logout />
-      </Route>
+
       <Route exact path="/missing">
         <MissingPage />
       </Route>

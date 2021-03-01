@@ -5,6 +5,7 @@ import {
   PencilLine,
   LinkedinLogo,
 } from "phosphor-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -95,22 +96,30 @@ const Footer = () => {
             Social
           </span>
           <div className="md:pt-5 flex items-center mt-1 space-x-3">
-            <GithubLogo
-              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
-              size={24}
-            />
-            <TwitterLogo
-              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
-              size={24}
-            />
-            <PencilLine
-              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
-              size={24}
-            />
-            <LinkedinLogo
-              className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
-              size={24}
-            />
+            <a href="https://github.com/sanspanic">
+              <GithubLogo
+                className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                size={24}
+              />
+            </a>
+            <a href="https://twitter.com/sansPanicDev">
+              <TwitterLogo
+                className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                size={24}
+              />
+            </a>
+            <a href="https://dev.to/sanspanic">
+              <PencilLine
+                className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                size={24}
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/sandra-spanikova-6738aa1b7/">
+              <LinkedinLogo
+                className="cursor-pointer text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                size={24}
+              />
+            </a>
           </div>
           <p className="mt-4 text-sm text-gray-500">
             I write code and I write about code. Occasionally, I make a joke
@@ -125,7 +134,7 @@ const Footer = () => {
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>
             <a
-              href="/"
+              href="/missing"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               F.A.Q
@@ -133,7 +142,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="/missing"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               Privacy Policy
@@ -141,7 +150,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="/missing"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               Terms &amp; Conditions

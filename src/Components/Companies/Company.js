@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../Header";
 import JoblyApi from "../../api";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import JobCard from "../Jobs/JobCard";
 import { v4 as uuid } from "uuid";
 import AuthContext from "../Auth/authContext";
@@ -15,12 +15,16 @@ const Company = () => {
     jobs: [],
   });
   const { handle } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const getOneCompany = async (handle) => {
-      const res = await JoblyApi.getCompany(handle);
-      setCurrCompany(res);
-      console.log(res);
+      try {
+        const res = await JoblyApi.getCompany(handle);
+        setCurrCompany(res);
+      } catch (e) {
+        history.push("/missing");
+      }
     };
     getOneCompany(handle);
     return () => {};

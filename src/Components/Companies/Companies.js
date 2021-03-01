@@ -35,9 +35,8 @@ const Companies = () => {
     <div className="bg-gray-100">
       <Header
         title="Currently Recruiting"
-        category="companies"
-        description="Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque rem aperiam, eaque ipsa quae."
+        category="employers"
+        description="All employers listed below are currently advertising open positions. Browse through the selection to find your dream job."
       />
       <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
         <CircleSVG />
