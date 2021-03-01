@@ -28,7 +28,7 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  /*   const handleSubmit = (e) => {
     e.preventDefault();
     try {
       register(formData);
@@ -45,8 +45,35 @@ const Signup = () => {
       }, 6000);
     } catch (e) {
       console.log("CAUGHT ERROR", e);
+      history.push("/request-error");
     }
     //setHasSubmitted(true);
+  }; */
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const tryToRegister = async (formData) => {
+      try {
+        await register(formData);
+        setFormData(initialState);
+        setSubmitting(true);
+
+        setTimeout(() => {
+          setSubmitting(false);
+          setDisplaySuccess(true);
+        }, 2000);
+
+        setTimeout(() => {
+          history.push("/login");
+        }, 6000);
+      } catch (e) {
+        console.log("CAUGHT ERROR", e);
+        history.push("/request-error");
+      }
+    };
+
+    tryToRegister(formData);
   };
 
   return (

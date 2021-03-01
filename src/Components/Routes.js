@@ -9,6 +9,7 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import Home from "./Home";
 import MissingPage from "./MissingPage";
+import RequestError from "./RequestError";
 
 const Routes = () => {
   return (
@@ -37,9 +38,11 @@ const Routes = () => {
       <Route exact path="/signup">
         <Signup />
       </Route>
-
       <Route exact path="/missing">
         <MissingPage />
+      </Route>
+      <Route exact path="/request-error">
+        <RequestError />
       </Route>
       <Redirect to="/" />
     </Switch>

@@ -13,7 +13,7 @@ const LoginButton = (smallScreen) => {
         title="Login"
       >
         Login 
-        <SignIn size={26} />
+        <SignIn size={23} />
       </a>
     </li>
   );

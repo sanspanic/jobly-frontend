@@ -45,14 +45,12 @@ function App() {
       setCurrUser(user);
       window.localStorage.setItem("currUser", JSON.stringify(user));
       setApplications(user.applications);
-      console.log("is APP's USE EFFECT gettin called?");
     };
     getUser();
   }, [token, username]);
 
   const register = async (formData) => {
     const res = await JoblyApi.register(formData);
-    console.log(res);
     setToken(res);
   };
 

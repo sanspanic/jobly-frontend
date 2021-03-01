@@ -7,17 +7,35 @@ import { v4 as uuid } from "uuid";
 import FilterJobsForm from "./FilterJobsForm";
 import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
+import { useHistory } from "react-router-dom";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
   const { currUser } = useContext(AuthContext);
+  const history = useHistory();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getJobs = async (criteria) => {
       const res = await JoblyApi.getJobs(criteria);
       setJobs(res);
     };
+
+    getJobs(filterCriteria);
+
+    return () => {};
+  }, [filterCriteria]); */
+
+  useEffect(() => {
+    const getJobs = async (criteria) => {
+      try {
+        const res = await JoblyApi.getJobs(criteria);
+        setJobs(res);
+      } catch (e) {
+        history.push("/request-error");
+      }
+    };
+
     getJobs(filterCriteria);
 
     return () => {};

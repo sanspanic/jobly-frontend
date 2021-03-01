@@ -86,7 +86,7 @@ const Navbar = () => {
                   title="Sign up"
                 >
                   Sign up 
-                  <UserPlus size={26} />
+                  <UserPlus size={23} />
                 </a>
               </li>
             )}
@@ -206,7 +206,7 @@ const Navbar = () => {
                             title="Sign up"
                           >
                             Sign up 
-                            <UserPlus size={26} />
+                            <UserPlus size={23} />
                           </a>
                         </li>
                       )}

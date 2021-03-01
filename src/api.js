@@ -14,7 +14,7 @@ class JoblyApi {
   //static token;
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", "endpoint: ", endpoint, "data: ", data, method);
+    //console.debug("API Call:", "endpoint: ", endpoint, "data: ", data, method);
 
     const token = window.localStorage.getItem("token");
     const url = `${BASE_URL}/${endpoint}`;
@@ -87,7 +87,6 @@ class JoblyApi {
   }
 
   static async edit(username, data) {
-    console.log("API CLASS IS NOW GONNA SEND REQUEST");
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }

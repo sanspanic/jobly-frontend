@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import JoblyApi from "../../api";
 import AuthContext from "../Auth/authContext";
 import RegularBtn from "./RegularBtn";
@@ -11,6 +11,7 @@ const JobCard = ({ job }) => {
   const [randNum, setRandNum] = useState(0);
   const { currUser, setCurrUser } = useContext(AuthContext);
   const { applications, setApplications } = useContext(JobsContext);
+  const history = useHistory();
 
   useEffect(() => {
     const num = Math.floor(Math.random() * 26) + 1;
@@ -22,12 +23,15 @@ const JobCard = ({ job }) => {
     //retrieve current user based on current token and username
     //save currUser to local storage + update currUser state
     const getUser = async () => {
-      const user = await JoblyApi.getUser(currUser.username);
-      window.localStorage.removeItem("currUser");
-      window.localStorage.setItem("currUser", JSON.stringify(user));
-      console.log("I just got a new user: ", user);
-      //TODO understand why updating currUser makes everything crash
-      //setCurrUser(user);
+      try {
+        const user = await JoblyApi.getUser(currUser.username);
+        window.localStorage.removeItem("currUser");
+        window.localStorage.setItem("currUser", JSON.stringify(user));
+        //TODO understand why updating currUser makes everything crash
+        //setCurrUser(user);
+      } catch (e) {
+        history.push("/request-error");
+      }
     };
     getUser();
     return () => {};
