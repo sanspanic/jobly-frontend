@@ -32,23 +32,6 @@ function App() {
     return user !== null ? JSON.parse(user).applications : [];
   });
 
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-    window.localStorage.setItem("token", token);
-    //retrieve current user based on current token and username
-    //save currUser to local storage
-    const getUser = async () => {
-      //window.localStorage.removeItem("currUser");
-      const user = await JoblyApi.getUser(username);
-      setCurrUser(user);
-      window.localStorage.setItem("currUser", JSON.stringify(user));
-      setApplications(user.applications);
-    };
-    getUser();
-  }, [token, username]);
-
   //applications get changed when user clicks on "apply" button in JobCard component
   useEffect(() => {
     const saveApps = async () => {
@@ -57,10 +40,6 @@ function App() {
       }
       try {
         const user = await JoblyApi.getUser(currUser.username);
-        console.log(
-          "THIS IS THE USER I GOT, HE SHOULD HAVE CURRENT APPLICation",
-          user
-        );
         window.localStorage.removeItem("currUser");
         window.localStorage.setItem("currUser", JSON.stringify(user));
       } catch (e) {
@@ -77,12 +56,21 @@ function App() {
   };
 
   const login = async (formData) => {
-    console.log("logging in");
-    //username needs to be exposed because the effect uses it to talk to backend
-    setUsername(formData.username);
+    //retrieve token, set as state and in localStorage
     const token = await JoblyApi.login(formData);
-    //once token is changed, effect is triggered that sets currUser
     setToken(token);
+    window.localStorage.setItem("token", token);
+
+    //retrieve current user based on current token and username, save currUser to local storage
+    //set applications in state
+    const getUser = async (username) => {
+      const user = await JoblyApi.getUser(username);
+      setCurrUser(user);
+      window.localStorage.setItem("currUser", JSON.stringify(user));
+      setApplications(user.applications);
+    };
+
+    getUser(formData.username);
   };
 
   const logout = () => {

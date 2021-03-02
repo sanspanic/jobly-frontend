@@ -12,6 +12,7 @@ const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const { login, currUser } = useContext(AuthContext);
   const history = useHistory();
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +33,7 @@ const Login = () => {
           history.push("/jobs");
         }, 1000);
       } catch (e) {
-        history.push("/request-error");
+        setErrorMsgs(e);
       }
     };
 
@@ -117,6 +118,16 @@ const Login = () => {
                         onChange={handleChange}
                       />
                     </div>
+                    {errorMsgs.length > 0 ? (
+                      <div className="text-red-400 text-s">
+                        <ul>
+                          {errorMsgs.map((e) => (
+                            <li>! {e}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
                     <div className="mt-4 mb-8 sm:mb-8">
                       <button
                         type="submit"
