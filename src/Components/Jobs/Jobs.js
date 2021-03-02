@@ -76,7 +76,7 @@ const Jobs = () => {
               </div>
             )}
             {errorMsgs.length > 0 && (
-              <div className="text-center font-mono text-red-400">
+              <div className="text-center font-mono text-red-400 pb-10">
                 Ooops, you entered an invalid search term! Try again.{" "}
               </div>
             )}

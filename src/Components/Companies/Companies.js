@@ -12,11 +12,13 @@ const Companies = () => {
   const [filterCriteria, setFilterCriteria] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasNoMatch, setHasNoMatch] = useState(false);
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   //effect to filter companies based on search criteria
   useEffect(() => {
     const getCompanies = async (criteria) => {
       try {
+        setErrorMsgs(false);
         setHasNoMatch(false);
         //remove empty strings from criteria, which would otherwise throw server error
         setIsLoading(true);
@@ -33,7 +35,8 @@ const Companies = () => {
         setCompanies(res);
         setIsLoading(false);
       } catch (e) {
-        console.log(e);
+        setErrorMsgs(e);
+        setIsLoading(false);
       }
     };
 
@@ -62,6 +65,11 @@ const Companies = () => {
         {hasNoMatch && (
           <div className="text-center font-mono">
             Oops! Your search didn't return any matches.
+          </div>
+        )}
+        {errorMsgs.length > 0 && (
+          <div className="text-center font-mono text-red-400 pb-10">
+            Ooops! One of your search terms is invalid. Try again.{" "}
           </div>
         )}
         <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
