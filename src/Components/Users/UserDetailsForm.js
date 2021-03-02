@@ -4,30 +4,39 @@ import AuthContext from "../Auth/authContext";
 import JoblyApi from "../../api";
 import SuccessAlert from "../FormComponents/SuccessAlert";
 import Spinner from "../FormComponents/Spinner";
+import FormErrorHandler from "../FormComponents/FormErrorHandler";
 
 const UserDetailsForm = () => {
   const { currUser } = useContext(AuthContext);
   const [formData, setFormData] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      JoblyApi.edit(currUser.username, formData);
-      setSubmitting(true);
 
-      setTimeout(() => {
-        setSubmitting(false);
-        setDisplaySuccess(true);
-      }, 2000);
+    const tryEdit = async () => {
+      console.log("TRYING");
+      try {
+        setErrorMsgs([]);
+        await JoblyApi.edit(currUser.username, formData);
+        setSubmitting(true);
 
-      setTimeout(() => {
-        setDisplaySuccess(false);
-      }, 5000);
-    } catch (e) {
-      console.log("CAUGHT ERROR", e);
-    }
+        setTimeout(() => {
+          setSubmitting(false);
+          setDisplaySuccess(true);
+        }, 2000);
+
+        setTimeout(() => {
+          setDisplaySuccess(false);
+        }, 5000);
+      } catch (e) {
+        console.log("CAUGHT ERROR", e);
+        setErrorMsgs(e);
+      }
+    };
+    tryEdit();
   };
 
   const handleChange = (e) => {
@@ -107,6 +116,7 @@ const UserDetailsForm = () => {
         />
       </div>
       <div className="mt-4 mb-8 sm:mb-8">
+        <FormErrorHandler errorMsgs={errorMsgs} />
         <button
           type="submit"
           className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"

@@ -34,6 +34,7 @@ const Signup = () => {
 
     const tryToRegister = async (formData) => {
       try {
+        setErrorMsgs([]);
         await register(formData);
         setFormData(initialState);
         setSubmitting(true);
