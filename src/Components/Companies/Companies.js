@@ -11,11 +11,13 @@ const Companies = () => {
   const [companies, setCompanies] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [hasNoMatch, setHasNoMatch] = useState(false);
 
   //effect to filter companies based on search criteria
   useEffect(() => {
     const getCompanies = async (criteria) => {
       try {
+        setHasNoMatch(false);
         //remove empty strings from criteria, which would otherwise throw server error
         setIsLoading(true);
         const cleanedCriteria = {};
@@ -25,6 +27,9 @@ const Companies = () => {
           }
         }
         const res = await JoblyApi.getCompanies(cleanedCriteria);
+        if (res.length === 0) {
+          setHasNoMatch(true);
+        }
         setCompanies(res);
         setIsLoading(false);
       } catch (e) {
@@ -54,6 +59,11 @@ const Companies = () => {
         <div className="font-xl font-mono text-center">
           {isLoading && <Spinner />}
         </div>
+        {hasNoMatch && (
+          <div className="text-center font-mono">
+            Oops! Your search didn't return any matches.
+          </div>
+        )}
         <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {companies.map((c) => (
             <CompanyCard company={c} key={uuid()} />

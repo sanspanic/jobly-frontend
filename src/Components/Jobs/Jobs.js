@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../Header";
 import JobCard from "./JobCard";
-import CircleSVG from "../Companies/CircleSVG";
 import JoblyApi from "../../api";
 import { v4 as uuid } from "uuid";
 import FilterJobsForm from "./FilterJobsForm";
@@ -9,18 +8,22 @@ import ProtectedRoute from "../Auth/ProtectedRoute";
 import AuthContext from "../Auth/authContext";
 import { useHistory } from "react-router-dom";
 import Spinner from "../FormComponents/Spinner";
+import FormErrorHandler from "../FormComponents/FormErrorHandler";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { currUser } = useContext(AuthContext);
-  const history = useHistory();
+  const [hasNoMatch, setHasNoMatch] = useState(false);
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   useEffect(() => {
     const getJobs = async (criteria) => {
       try {
+        setErrorMsgs([]);
         setIsLoading(true);
+        setHasNoMatch(false);
         //remove empty strings from criteria, which would otherwise throw server error
         const cleanedCriteria = {};
         for (const property in criteria) {
@@ -29,10 +32,14 @@ const Jobs = () => {
           }
         }
         const res = await JoblyApi.getJobs(cleanedCriteria);
+        if (res.length === 0) {
+          setHasNoMatch(true);
+        }
         setJobs(res);
         setIsLoading(false);
       } catch (e) {
-        history.push("/request-error");
+        setErrorMsgs(e);
+        setIsLoading(false);
       }
     };
 
@@ -61,6 +68,16 @@ const Jobs = () => {
             {isLoading && (
               <div className="font-xl font-mono text-center">
                 <Spinner />
+              </div>
+            )}
+            {hasNoMatch && (
+              <div className="text-center font-mono">
+                Oops! Your search didn't return any matches.
+              </div>
+            )}
+            {errorMsgs.length > 0 && (
+              <div className="text-center font-mono text-red-400">
+                Ooops, you entered an invalid search term! Try again.{" "}
               </div>
             )}
             <div className="relative grid gap-5 grid-cols-1 sm:grid-cols-2">
