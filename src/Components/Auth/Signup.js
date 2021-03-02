@@ -6,7 +6,6 @@ import Spinner from "../FormComponents/Spinner";
 import SuccessAlert from "../FormComponents/SuccessAlert";
 
 const Signup = () => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const initialState = {
     username: "",
     email: "",
@@ -28,28 +27,6 @@ const Signup = () => {
     }));
   };
 
-  /*   const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
-      register(formData);
-      setFormData(initialState);
-      setSubmitting(true);
-
-      setTimeout(() => {
-        setSubmitting(false);
-        setDisplaySuccess(true);
-      }, 2000);
-
-      setTimeout(() => {
-        history.push("/login");
-      }, 6000);
-    } catch (e) {
-      console.log("CAUGHT ERROR", e);
-      history.push("/request-error");
-    }
-    //setHasSubmitted(true);
-  }; */
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -66,7 +43,7 @@ const Signup = () => {
 
         setTimeout(() => {
           history.push("/login");
-        }, 6000);
+        }, 5000);
       } catch (e) {
         console.log("CAUGHT ERROR", e);
         history.push("/request-error");
@@ -224,21 +201,11 @@ const Signup = () => {
               </form>{" "}
               {displaySuccess && (
                 <>
-                  <SuccessAlert msg="Rejoice! You're about to be redirected to the login page." />
-                  <Spinner />
-                </>
-              )}
-              {hasSubmitted && (
-                <>
-                  <div>Success!</div>
-                  <div>
-                    You can now{" "}
-                    <Link
-                      className="bg-deep-purple-accent-400 text-white hover:bg-deep-purple-accent-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
-                      to="/login"
-                    >
-                      LOGIN
-                    </Link>
+                  <div className="text-center">
+                    <SuccessAlert
+                      spinner
+                      msg="Rejoice! You're about to be redirected to the login page."
+                    />
                   </div>
                 </>
               )}

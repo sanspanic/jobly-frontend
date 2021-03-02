@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Spinner = () => {
   return (
     <div>
-      Loading...
       <FontAwesomeIcon icon="spinner" spin />
     </div>
   );

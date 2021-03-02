@@ -52,6 +52,9 @@ function App() {
   //applications get changed when user clicks on "apply" button in JobCard component
   useEffect(() => {
     const saveApps = async () => {
+      if (!currUser.username) {
+        return;
+      }
       try {
         const user = await JoblyApi.getUser(currUser.username);
         console.log(

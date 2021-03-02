@@ -118,7 +118,7 @@ const Navbar = () => {
                 <div className="p-5 bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <a
+                      <NavLink
                         to="/companies"
                         aria-label="Company"
                         title="Company"
@@ -142,7 +142,7 @@ const Navbar = () => {
                         <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                           Companies
                         </span>
-                      </a>
+                      </NavLink>
                     </div>
                     <div>
                       <button
@@ -163,34 +163,34 @@ const Navbar = () => {
                   <nav>
                     <ul className="space-y-4">
                       <li>
-                        <a
+                        <NavLink
                           to="/jobs"
                           aria-label="jobs"
                           title="jobs"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Jobs
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a
+                        <NavLink
                           to="/companies"
                           aria-label="Our product"
                           title="Our product"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Companies
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a
+                        <NavLink
                           to="/profile"
                           aria-label="Our product"
                           title="Our product"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Profile
-                        </a>
+                        </NavLink>
                       </li>
                       {currUser.username ? (
                         <LogoutButton smallScreen />
@@ -199,7 +199,7 @@ const Navbar = () => {
                       )}
                       {currUser.username ? null : (
                         <li>
-                          <a
+                          <NavLink
                             href="/signup"
                             className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                             aria-label="Sign up"
@@ -207,7 +207,7 @@ const Navbar = () => {
                           >
                             Sign up 
                             <UserPlus size={23} />
-                          </a>
+                          </NavLink>
                         </li>
                       )}
                     </ul>
