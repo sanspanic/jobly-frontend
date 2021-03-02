@@ -21,7 +21,14 @@ const Jobs = () => {
     const getJobs = async (criteria) => {
       try {
         setIsLoading(true);
-        const res = await JoblyApi.getJobs(criteria);
+        //remove empty strings from criteria, which would otherwise throw server error
+        const cleanedCriteria = {};
+        for (const property in criteria) {
+          if (criteria[property] != "") {
+            cleanedCriteria[property] = criteria[property];
+          }
+        }
+        const res = await JoblyApi.getJobs(cleanedCriteria);
         setJobs(res);
         setIsLoading(false);
       } catch (e) {

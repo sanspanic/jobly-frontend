@@ -96,7 +96,7 @@ const Navbar = () => {
               aria-label="Open Menu"
               title="Open Menu"
               className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => setIsMenuOpen(true)}
+              onClick={() => setIsMenuOpen((currVal) => !currVal)}
             >
               <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
                 <path
@@ -200,7 +200,7 @@ const Navbar = () => {
                       {currUser.username ? null : (
                         <li>
                           <NavLink
-                            href="/signup"
+                            to="/signup"
                             className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                             aria-label="Sign up"
                             title="Sign up"
