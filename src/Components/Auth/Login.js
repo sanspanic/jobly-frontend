@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import AuthContext from "./authContext";
 import AuthSVG from "./AuthSVG";
 import { Link, useHistory, Redirect } from "react-router-dom";
+import FormErrorHandler from "../FormComponents/FormErrorHandler";
 
 const Login = () => {
   const initialState = {
@@ -118,15 +119,7 @@ const Login = () => {
                         onChange={handleChange}
                       />
                     </div>
-                    {errorMsgs.length > 0 ? (
-                      <div className="text-red-400 text-s">
-                        <ul>
-                          {errorMsgs.map((e) => (
-                            <li>! {e}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
+                    <FormErrorHandler errorMsgs={errorMsgs} />
 
                     <div className="mt-4 mb-8 sm:mb-8">
                       <button

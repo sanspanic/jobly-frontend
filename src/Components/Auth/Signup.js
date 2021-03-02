@@ -4,6 +4,7 @@ import AuthSVG from "./AuthSVG";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import Spinner from "../FormComponents/Spinner";
 import SuccessAlert from "../FormComponents/SuccessAlert";
+import FormErrorHandler from "../FormComponents/FormErrorHandler";
 
 const Signup = () => {
   const initialState = {
@@ -18,6 +19,7 @@ const Signup = () => {
   const [submitting, setSubmitting] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
   const history = useHistory();
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +47,7 @@ const Signup = () => {
           history.push("/login");
         }, 5000);
       } catch (e) {
-        console.log("CAUGHT ERROR", e);
-        history.push("/request-error");
+        setErrorMsgs(e);
       }
     };
 
@@ -186,6 +187,7 @@ const Signup = () => {
                     </div>
                   </div>
                 </div>
+                <FormErrorHandler errorMsgs={errorMsgs} />
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <button className="block w-full transition duration-200 max-w-xs mx-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
