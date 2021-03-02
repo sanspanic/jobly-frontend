@@ -22,7 +22,7 @@ class JoblyApi {
     const params = method === "get" ? data : {};
 
     try {
-      console.log("sent a request with the following header: ", headers);
+      //console.log("sent a request with the following header: ", headers);
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       console.error("API Error:", err.response);
@@ -70,6 +70,7 @@ class JoblyApi {
 
   /* login  user */
   static async login(data) {
+    console.log("trying to login API");
     let res = await this.request(`auth/token`, data, "post");
     return res.token;
   }
@@ -77,6 +78,7 @@ class JoblyApi {
   /* get user */
 
   static async getUser(username) {
+    console.log("getting user", username);
     let res = await this.request(`users/${username}`);
     return res.user;
   }

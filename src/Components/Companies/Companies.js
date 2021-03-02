@@ -5,24 +5,33 @@ import CircleSVG from "./CircleSVG";
 import Header from "../Header";
 import FilterCompaniesForm from "./FilterCompaniesForm";
 import { v4 as uuid } from "uuid";
+import Spinner from "../FormComponents/Spinner";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   //effect to filter companies based on search criteria
   useEffect(() => {
     const getCompanies = async (criteria) => {
-      //remove empty strings from criteria, which would otherwise throw server error
-      const cleanedCriteria = {};
-      for (const property in criteria) {
-        if (criteria[property] != "") {
-          cleanedCriteria[property] = criteria[property];
+      try {
+        //remove empty strings from criteria, which would otherwise throw server error
+        setIsLoading(true);
+        const cleanedCriteria = {};
+        for (const property in criteria) {
+          if (criteria[property] != "") {
+            cleanedCriteria[property] = criteria[property];
+          }
         }
+        const res = await JoblyApi.getCompanies(cleanedCriteria);
+        setCompanies(res);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
       }
-      const res = await JoblyApi.getCompanies(cleanedCriteria);
-      setCompanies(res);
     };
+
     getCompanies(filterCriteria);
     return () => {};
   }, [filterCriteria]);
@@ -39,8 +48,12 @@ const Companies = () => {
         description="All employers listed below are currently advertising open positions. Browse through the selection to find your dream job."
       />
       <div className="relative px-4 pb-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-0 lg:pb-20">
-        <CircleSVG />
+        {/*         <CircleSVG />
+         */}{" "}
         <FilterCompaniesForm addFilterCriteria={addFilterCriteria} />
+        <div className="font-xl font-mono text-center">
+          {isLoading && <Spinner />}
+        </div>
         <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {companies.map((c) => (
             <CompanyCard company={c} key={uuid()} />
