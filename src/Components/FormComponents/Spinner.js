@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Spinner = () => {
   return (
     <div>
-      Reticulating splines...
+      Loading...
       <FontAwesomeIcon icon="spinner" spin />
     </div>
   );

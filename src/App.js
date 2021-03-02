@@ -49,6 +49,25 @@ function App() {
     getUser();
   }, [token, username]);
 
+  //applications get changed when user clicks on "apply" button in JobCard component
+  useEffect(() => {
+    const saveApps = async () => {
+      try {
+        const user = await JoblyApi.getUser(currUser.username);
+        console.log(
+          "THIS IS THE USER I GOT, HE SHOULD HAVE CURRENT APPLICation",
+          user
+        );
+        window.localStorage.removeItem("currUser");
+        window.localStorage.setItem("currUser", JSON.stringify(user));
+      } catch (e) {
+        console.log("API call went wrong");
+      }
+    };
+
+    saveApps();
+  }, [applications]);
+
   const register = async (formData) => {
     const res = await JoblyApi.register(formData);
     setToken(res);
@@ -56,11 +75,9 @@ function App() {
 
   const login = async (formData) => {
     console.log("logging in");
-    console.log(formData);
     //username needs to be exposed because the effect uses it to talk to backend
     setUsername(formData.username);
     const token = await JoblyApi.login(formData);
-    console.log(token);
     //once token is changed, effect is triggered that sets currUser
     setToken(token);
   };

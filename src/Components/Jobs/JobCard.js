@@ -19,24 +19,6 @@ const JobCard = ({ job }) => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    //retrieve current user based on current token and username
-    //save currUser to local storage + update currUser state
-    const getUser = async () => {
-      try {
-        const user = await JoblyApi.getUser(currUser.username);
-        window.localStorage.removeItem("currUser");
-        window.localStorage.setItem("currUser", JSON.stringify(user));
-        //TODO understand why updating currUser makes everything crash
-        //setCurrUser(user);
-      } catch (e) {
-        history.push("/request-error");
-      }
-    };
-    getUser();
-    return () => {};
-  }, [applications]);
-
   //call API and "apply" in DB
   //also trigget applications state change
   //which will rerender jobs section in profile & trigger effect to update local storage

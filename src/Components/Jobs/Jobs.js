@@ -17,17 +17,6 @@ const Jobs = () => {
   const { currUser } = useContext(AuthContext);
   const history = useHistory();
 
-  /*   useEffect(() => {
-    const getJobs = async (criteria) => {
-      const res = await JoblyApi.getJobs(criteria);
-      setJobs(res);
-    };
-
-    getJobs(filterCriteria);
-
-    return () => {};
-  }, [filterCriteria]); */
-
   useEffect(() => {
     const getJobs = async (criteria) => {
       try {
@@ -64,8 +53,7 @@ const Jobs = () => {
             <FilterJobsForm addFilterCriteria={addFilterCriteria} />
             {isLoading && (
               <div className="font-xl font-mono text-center">
-                {" "}
-                Loading... <Spinner />
+                <Spinner />
               </div>
             )}
             <div className="relative grid gap-5 grid-cols-1 sm:grid-cols-2">
