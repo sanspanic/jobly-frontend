@@ -3,6 +3,7 @@ import AuthContext from "./authContext";
 import AuthSVG from "./AuthSVG";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import FormErrorHandler from "../FormComponents/FormErrorHandler";
+import Spinner from "../FormComponents/Spinner";
 
 const Login = () => {
   const initialState = {
@@ -14,6 +15,7 @@ const Login = () => {
   const { login, currUser } = useContext(AuthContext);
   const history = useHistory();
   const [errorMsgs, setErrorMsgs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,8 +30,11 @@ const Login = () => {
 
     const tryToLogin = async (formData) => {
       try {
+        setIsLoading(true);
+        setErrorMsgs([]);
         await login(formData);
         setFormData(initialState);
+        setIsLoading(false);
         setTimeout(() => {
           history.push("/jobs");
         }, 1000);
@@ -126,7 +131,7 @@ const Login = () => {
                         type="submit"
                         className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                       >
-                        Login
+                        Login  {isLoading ? <Spinner /> : null}
                       </button>
                     </div>
                     <p className="text-xs text-gray-600 sm:text-sm">
