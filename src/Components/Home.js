@@ -27,7 +27,7 @@ export const Home = () => {
             Take the plunge
           </p>
           <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-            Getting a job
+            Getting a job 
             <br className="hidden md:block" />
             has never been 
             <span className="inline-block text-deep-purple-accent-400">

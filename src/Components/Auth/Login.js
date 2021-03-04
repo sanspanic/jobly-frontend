@@ -25,6 +25,11 @@ const Login = () => {
     }));
   };
 
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -138,13 +143,13 @@ const Login = () => {
                       No account yet? Sign up below.
                     </p>
                     <div className="mt-4 mb-2 sm:mb-4">
-                      <Link
-                        to="/signup"
+                      <button
+                        onClick={handleSignupClick}
                         type="submit"
                         className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                       >
                         Sign up
-                      </Link>
+                      </button>
                     </div>
                   </form>
                 </div>
